@@ -1,12 +1,7 @@
-<Page class="page"
-    navigatingTo="onNavigatingTo" 
-    xmlns="http://schemas.nativescript.org/tns.xsd">
-    
-    <ActionBar class="action-bar">
-        <Label class="action-bar-title" text="Home"></Label>
-    </ActionBar>
-
-    <GridLayout>
-        <!-- Add your page content here -->
-    </GridLayout>
+<Page class="page" navigatingTo="onNavigatingTo"
+    xmlns:vco="nativescript-visa-checkout">
+    <StackLayout>
+        <Button text="TAP ME!" tap="addVisaCheckoutButton" />
+        <vco:VisaCheckout payment="onPayment" height="47" width="213" />
+    </StackLayout>
 </Page>

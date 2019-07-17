@@ -1,28 +1,29 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import * as app from 'tns-core-modules/application';
-import * as dialogs from 'tns-core-modules/ui/dialogs';
+import { View, EventData } from "tns-core-modules/ui/core/view";
 
-export class Common extends Observable {
-  public message: string;
+export enum VisaCheckoutPaymentStatus {
+  Success = "payment.success",
+  Cancel = "payment.cancel",
+  Error = "payment.error",
+  Failure = "payment.failure"
+};
+
+export enum VisaCheckoutEnvironment {
+  SANDBOX = "https://sandbox.secure.checkout.visa.com",
+  PRODUCTION = "https://secure.checkout.visa.com"
+}
+
+export enum VisaCheckoutCurrency {
+  GBP = "GBP",
+  EUR = "EUR"
+}
+
+export interface VisaCheckoutPaymentEventData extends EventData { status: VisaCheckoutPaymentStatus, callId: string };
+
+export class VisaCheckout extends View {
+  public static paymentEvent: string = "payment";
 
   constructor() {
     super();
-    this.message = Utils.SUCCESS_MSG();
-  }
 
-  public greet() {
-    return "Hello, NS";
-  }
-}
-
-export class Utils {
-  public static SUCCESS_MSG(): string {
-    let msg = `Your plugin is working on ${app.android ? 'Android' : 'iOS'}.`;
-
-    setTimeout(() => {
-      dialogs.alert(`${msg} For real. It's really working :)`).then(() => console.log(`Dialog closed.`));
-    }, 2000);
-
-    return msg;
   }
 }

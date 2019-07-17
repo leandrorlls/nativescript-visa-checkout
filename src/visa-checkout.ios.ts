@@ -1,5 +1,8 @@
-import { Common } from './visa-checkout.common';
+import { VisaCheckout as VisaCheckoutBase } from './visa-checkout.common';
 
-export class VisaCheckout extends Common {
+export class VisaCheckout extends VisaCheckoutBase {
+    constructor() {
+        super();
 
+    }
 }
