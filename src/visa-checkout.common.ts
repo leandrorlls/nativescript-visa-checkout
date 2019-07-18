@@ -1,29 +1,78 @@
-import { View, EventData } from "tns-core-modules/ui/core/view";
-
-export enum VisaCheckoutPaymentStatus {
-  Success = "payment.success",
-  Cancel = "payment.cancel",
-  Error = "payment.error",
-  Failure = "payment.failure"
-};
+import { View, EventData, isIOS } from "tns-core-modules/ui/core/view";
 
 export enum VisaCheckoutEnvironment {
-  SANDBOX = "https://sandbox.secure.checkout.visa.com",
-  PRODUCTION = "https://secure.checkout.visa.com"
+  Sandbox,
+  Production
+}
+
+export enum VisaCheckoutPaymentResultStatus {
+  Success,
+  Cancel,
+  Error,
+  Failure
 }
 
 export enum VisaCheckoutCurrency {
-  GBP = "GBP",
-  EUR = "EUR"
+  USD,
+  AUD,
+  BRL,
+  CAD,
+  CNY,
+  CLP,
+  COP,
+  HKD,
+  MYR,
+  MXN,
+  NZD,
+  PEN,
+  SGD,
+  ZAR,
+  AED,
+  ARS,
+  GBP,
+  EUR,
+  PLN,
+  INR,
+  UAH,
+  SAR,
+  KWD,
+  QAR
 }
 
-export interface VisaCheckoutPaymentEventData extends EventData { status: VisaCheckoutPaymentStatus, callId: string };
+export interface VisaCheckoutPaymentResultEventData extends EventData {
+  status: VisaCheckoutPaymentResultStatus;
+  callId: string;
+}
+
+export interface VisaCheckoutConfig {
+  environment: string;
+  apiKey: string;
+  profileName: string;
+  total: number;
+  currency: string;
+}
 
 export class VisaCheckout extends View {
-  public static paymentEvent: string = "payment";
+  protected _environment: VisaCheckoutEnvironment;
+  protected _apiKey: string;
+  protected _profileName: string
+  protected _total: number;
+  protected _currency: VisaCheckoutCurrency;
+  public static paymentResultEvent: string = "paymentResult";
 
-  constructor() {
+  constructor(config: VisaCheckoutConfig) {
     super();
 
+    this._environment = !!config.environment && config.environment.toLowerCase() === "production"
+      ? VisaCheckoutEnvironment.Production
+      : VisaCheckoutEnvironment.Sandbox;
+
+    this._currency = !!config.currency && config.currency.toLowerCase() === "eur"
+      ? VisaCheckoutCurrency.EUR
+      : VisaCheckoutCurrency.GBP;
+
+    this._apiKey = config.apiKey;
+    this._profileName = config.profileName;
+    this._total = config.total;
   }
 }

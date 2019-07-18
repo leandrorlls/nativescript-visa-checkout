@@ -1,7 +1,6 @@
-<Page class="page" navigatingTo="onNavigatingTo"
-    xmlns:vco="nativescript-visa-checkout">
+<Page class="page" navigatingTo="onNavigatingTo">
     <StackLayout>
         <Button text="TAP ME!" tap="addVisaCheckoutButton" />
-        <vco:VisaCheckout payment="onPayment" height="47" width="213" />
+        <StackLayout id="vco-placeholder"></StackLayout>
     </StackLayout>
 </Page>

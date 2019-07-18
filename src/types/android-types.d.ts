@@ -16,6 +16,10 @@ declare namespace com {
                 getStatusName(): string;
                 getCallId(): string;
             }
+            enum Environment {
+                SANDBOX = "https://sandbox.secure.checkout.visa.com",
+                PRODUCTION = "https://secure.checkout.visa.com"
+            }
         }
     }
 }
@@ -77,8 +81,30 @@ declare namespace com {
             }
             namespace PurchaseInfo {
                 enum Currency {
+                    USD = "USD",
+                    AUD = "AUD",
+                    BRL = "BRL",
+                    CAD = "CAD",
+                    CNY = "CNY",
+                    CLP = "CLP",
+                    COP = "COP",
+                    HKD = "HKD",
+                    MYR = "MYR",
+                    MXN = "MXN",
+                    NZD = "NZD",
+                    PEN = "PEN",
+                    SGD = "SGD",
+                    ZAR = "ZAR",
+                    AED = "AED",
+                    ARS = "ARS",
                     GBP = "GBP",
-                    EUR = "EUR"
+                    EUR = "EUR",
+                    PLN = "PLN",
+                    INR = "INR",
+                    UAH = "UAH",
+                    SAR = "SAR",
+                    KWD = "KWD",
+                    QAR = "QAR"
                 }
             }
         }

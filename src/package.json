@@ -1,7 +1,7 @@
 {
 	"name": "nativescript-visa-checkout",
-	"version": "1.0.0",
-	"description": "Your awesome NativeScript plugin.",
+	"version": "1.0.3",
+	"description": "NativeScript plugin for Visa Checkout.",
 	"main": "visa-checkout",
 	"typings": "index.d.ts",
 	"nativescript": {
@@ -23,7 +23,7 @@
 		"plugin.tscwatch": "npm run tsc -- -w",
 		"ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**'",
 		"prepack": "npm run build.native",
-		"demo.ios": "npm run tsc && cd ../demo && tns run ios --emulator",
+		"demo.ios": "npm run tsc && cd ../demo && tns debug ios --emulator",
 		"demo.android": "npm run tsc && cd ../demo && tns debug android --emulator",
 		"demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
 		"plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-visa-checkout && tns plugin add ../src",
@@ -36,8 +36,8 @@
 		"iOS"
 	],
 	"author": {
-		"name": "Your Name",
-		"email": "youremail@yourdomain.com"
+		"name": "Leandrorlls",
+		"email": "leandrorlls@gmail.com"
 	},
 	"bugs": {
 		"url": "https://github.com/leandrorlls/nativescript-visa-checkout/issues"
