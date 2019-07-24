@@ -59,14 +59,17 @@ export class VisaCheckout extends VisaCheckoutBase {
                 ? com.visa.checkout.Environment.SANDBOX
                 : com.visa.checkout.Environment.PRODUCTION)
             .setProfileName(this._profileName)
-            .setDataLevel(com.visa.checkout.Profile.DataLevel.NONE)
-            .setCountryCode(com.visa.checkout.Profile.Country.GB)
+            .setDisplayName(this._displayName)
             .build();
     }
 
     private _getPurchaseInfo(): com.visa.checkout.PurchaseInfo {
         const currency = this._getCurrencyFrom(this._currency);
         const purchaseInfo = new com.visa.checkout.PurchaseInfo.PurchaseInfoBuilder(new java.math.BigDecimal(this._total), currency);
+        purchaseInfo.setShippingAddressRequired(false)
+        purchaseInfo.setThreeDSSetup(false, false)
+        purchaseInfo.setSubTotal(new java.math.BigDecimal(this._total))
+        purchaseInfo.setUserReviewAction(com.visa.checkout.PurchaseInfo.UserReviewAction.PAY);
         return purchaseInfo.build();
     }
 

@@ -4,7 +4,7 @@ declare namespace com {
             class Profile { }
             class PurchaseInfo { }
             class CheckoutButton {
-                constructor(context: any) { }
+                constructor(context: any);
                 init(activity: any, profile: com.visa.checkout.Profile, purchaseInfo: com.visa.checkout.PurchaseInfo, visaCheckoutResultListener: com.visa.checkout.VisaCheckoutSdk.VisaCheckoutResultListener);
             }
             class VisaCheckoutSdk { }
@@ -29,20 +29,29 @@ declare namespace com {
         namespace checkout {
             namespace Profile {
                 class ProfileBuilder {
-                    constructor(var1: string, var2: string) { }
+                    constructor(var1: string, var2: string);
                     setProfileName(var1: string);
                 }
             }
             namespace PurchaseInfo {
                 class PurchaseInfoBuilder {
-                    constructor(value: java.math.BigDecimal, currency: string) { }
-                    setPrefillRequest(var1: Function);
+                    constructor(value: java.math.BigDecimal, currency: string);
+                    setPrefillRequest(var1: Function): PurchaseInfoBuilder;
+                    setShippingAddressRequired(p1: boolean): PurchaseInfoBuilder;
+                    setThreeDSSetup(p1: boolean, p2: boolean): PurchaseInfoBuilder;
+                    setSubTotal(total: java.math.BigDecimal): PurchaseInfoBuilder;
+                    setUserReviewAction(p1: string): PurchaseInfoBuilder;
                     build();
+                }
+                class UserReviewAction {
+                    static PAY: any;
+                    static CONTINUE: any;
+                    static ADD_CARD_TO_MERCHANT: any;
                 }
             }
             namespace VisaCheckoutSdk {
                 class VisaCheckoutResultListener {
-                    constructor(arg: any) { }
+                    constructor(arg: any);
                     onResult(visaPaymentSummary: com.visa.checkout.VisaPaymentSummary): void;
                     onButtonClick(launchReadyHandler: com.visa.checkout.VisaCheckoutSdk.VisaCheckoutResultListener.LaunchReadyHandler): void;
                 }

@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-visa-checkout",
-	"version": "1.0.3",
+	"version": "1.0.0",
 	"description": "NativeScript plugin for Visa Checkout.",
 	"main": "visa-checkout",
 	"typings": "index.d.ts",

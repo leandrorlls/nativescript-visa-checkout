@@ -15,9 +15,9 @@ export function addVisaCheckoutButton(args: EventData): void {
 
     const vcoConfig: VisaCheckoutConfig = {
         environment: "sandbox",
-        apiKey: "76Z4EZC6R5NNCCW4AMM721iCI64AGR-YRcpwq7atHdUgUnhPU",
-        profileName: "SYSTEMDEFAULT",
-        currency: "GBP",
+        apiKey: "YOUR_API_KEY",
+        profileName: "YOUR_PROFILE_NAME",
+        currency: "GBP", // Only GBP and EUR for now 
         total: 10.08
     }
 

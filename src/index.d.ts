@@ -43,6 +43,7 @@ export interface VisaCheckoutConfig {
     environment: string;
     apiKey: string;
     profileName: string;
+    displayName: string;
     total: number;
     currency: string;
 }

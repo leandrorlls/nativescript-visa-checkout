@@ -48,6 +48,7 @@ export interface VisaCheckoutConfig {
   environment: string;
   apiKey: string;
   profileName: string;
+  displayName: string;
   total: number;
   currency: string;
 }
@@ -56,6 +57,7 @@ export class VisaCheckout extends View {
   protected _environment: VisaCheckoutEnvironment;
   protected _apiKey: string;
   protected _profileName: string
+  protected _displayName: string
   protected _total: number;
   protected _currency: VisaCheckoutCurrency;
   public static paymentResultEvent: string = "paymentResult";
@@ -73,6 +75,7 @@ export class VisaCheckout extends View {
 
     this._apiKey = config.apiKey;
     this._profileName = config.profileName;
+    this._displayName = config.displayName;
     this._total = config.total;
   }
 }
