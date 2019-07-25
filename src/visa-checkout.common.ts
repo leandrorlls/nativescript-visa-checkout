@@ -1,28 +1,81 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import * as app from 'tns-core-modules/application';
-import * as dialogs from 'tns-core-modules/ui/dialogs';
+import { View, EventData, isIOS } from "tns-core-modules/ui/core/view";
 
-export class Common extends Observable {
-  public message: string;
-
-  constructor() {
-    super();
-    this.message = Utils.SUCCESS_MSG();
-  }
-
-  public greet() {
-    return "Hello, NS";
-  }
+export enum VisaCheckoutEnvironment {
+  Sandbox,
+  Production
 }
 
-export class Utils {
-  public static SUCCESS_MSG(): string {
-    let msg = `Your plugin is working on ${app.android ? 'Android' : 'iOS'}.`;
+export enum VisaCheckoutPaymentResultStatus {
+  Success,
+  Cancel,
+  Error,
+  Failure
+}
 
-    setTimeout(() => {
-      dialogs.alert(`${msg} For real. It's really working :)`).then(() => console.log(`Dialog closed.`));
-    }, 2000);
+export enum VisaCheckoutCurrency {
+  USD,
+  AUD,
+  BRL,
+  CAD,
+  CNY,
+  CLP,
+  COP,
+  HKD,
+  MYR,
+  MXN,
+  NZD,
+  PEN,
+  SGD,
+  ZAR,
+  AED,
+  ARS,
+  GBP,
+  EUR,
+  PLN,
+  INR,
+  UAH,
+  SAR,
+  KWD,
+  QAR
+}
 
-    return msg;
+export interface VisaCheckoutPaymentResultEventData extends EventData {
+  status: VisaCheckoutPaymentResultStatus;
+  callId: string;
+}
+
+export interface VisaCheckoutConfig {
+  environment: string;
+  apiKey: string;
+  profileName: string;
+  displayName: string;
+  total: number;
+  currency: string;
+}
+
+export class VisaCheckout extends View {
+  protected _environment: VisaCheckoutEnvironment;
+  protected _apiKey: string;
+  protected _profileName: string
+  protected _displayName: string
+  protected _total: number;
+  protected _currency: VisaCheckoutCurrency;
+  public static paymentResultEvent: string = "paymentResult";
+
+  constructor(config: VisaCheckoutConfig) {
+    super();
+
+    this._environment = !!config.environment && config.environment.toLowerCase() === "production"
+      ? VisaCheckoutEnvironment.Production
+      : VisaCheckoutEnvironment.Sandbox;
+
+    this._currency = !!config.currency && config.currency.toLowerCase() === "eur"
+      ? VisaCheckoutCurrency.EUR
+      : VisaCheckoutCurrency.GBP;
+
+    this._apiKey = config.apiKey;
+    this._profileName = config.profileName;
+    this._displayName = config.displayName;
+    this._total = config.total;
   }
 }
