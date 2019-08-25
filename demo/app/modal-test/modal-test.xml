@@ -1,6 +1,5 @@
 <Page class="page">
     <StackLayout>
-        <Button text="ShowModal" tap="ShowModal" />
         <Button text="TAP ME!" tap="addVisaCheckoutButton" />
         <StackLayout id="vco-placeholder"></StackLayout>
     </StackLayout>

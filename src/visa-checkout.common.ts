@@ -1,42 +1,9 @@
-import { View, EventData, isIOS } from "tns-core-modules/ui/core/view";
-
-export enum VisaCheckoutEnvironment {
-  Sandbox,
-  Production
-}
+import { EventData, View } from "tns-core-modules/ui/core/view";
 
 export enum VisaCheckoutPaymentResultStatus {
-  Success,
-  Cancel,
-  Error,
-  Failure
-}
-
-export enum VisaCheckoutCurrency {
-  USD,
-  AUD,
-  BRL,
-  CAD,
-  CNY,
-  CLP,
-  COP,
-  HKD,
-  MYR,
-  MXN,
-  NZD,
-  PEN,
-  SGD,
-  ZAR,
-  AED,
-  ARS,
-  GBP,
-  EUR,
-  PLN,
-  INR,
-  UAH,
-  SAR,
-  KWD,
-  QAR
+  Cancel = "Cancel",
+  Error = "Error",
+  Success = "Success"
 }
 
 export interface VisaCheckoutPaymentResultEventData extends EventData {
@@ -45,7 +12,7 @@ export interface VisaCheckoutPaymentResultEventData extends EventData {
 }
 
 export interface VisaCheckoutConfig {
-  environment: string;
+  isLive: boolean;
   apiKey: string;
   profileName: string;
   displayName: string;
@@ -53,26 +20,20 @@ export interface VisaCheckoutConfig {
   currency: string;
 }
 
-export class VisaCheckout extends View {
-  protected _environment: VisaCheckoutEnvironment;
+export class NSVisaCheckoutButton extends View {
+  protected _isLive: boolean;
   protected _apiKey: string;
   protected _profileName: string
   protected _displayName: string
   protected _total: number;
-  protected _currency: VisaCheckoutCurrency;
-  public static paymentResultEvent: string = "paymentResult";
+  protected _currency: string;
+  public static PaymentResultEvent: string = "paymentResult";
 
   constructor(config: VisaCheckoutConfig) {
     super();
 
-    this._environment = !!config.environment && config.environment.toLowerCase() === "production"
-      ? VisaCheckoutEnvironment.Production
-      : VisaCheckoutEnvironment.Sandbox;
-
-    this._currency = !!config.currency && config.currency.toLowerCase() === "eur"
-      ? VisaCheckoutCurrency.EUR
-      : VisaCheckoutCurrency.GBP;
-
+    this._isLive = config.isLive;
+    this._currency = config.currency.toUpperCase();
     this._apiKey = config.apiKey;
     this._profileName = config.profileName;
     this._displayName = config.displayName;
